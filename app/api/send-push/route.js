@@ -39,15 +39,22 @@ function loadServiceAccount() {
   );
 }
 
-if (!admin.apps.length) {
-  const serviceAccount = loadServiceAccount();
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-  });
+// Initialize Firebase Admin lazily (only when handler is called)
+function getAdmin() {
+  if (!admin.apps.length) {
+    const serviceAccount = loadServiceAccount();
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+  }
+  return admin;
 }
 
 export async function POST(req) {
   try {
+    // Initialize admin only when the endpoint is called
+    const adminInstance = getAdmin();
+    
     const { token, title, body } = await req.json();
 
     if (!token) {
@@ -62,7 +69,7 @@ export async function POST(req) {
       notification: { title: title || "", body: body || "" },
     };
 
-    const response = await admin.messaging().send(message);
+    const response = await adminInstance.messaging().send(message);
 
     return new Response(JSON.stringify({ ok: true, response }), {
       status: 200,
