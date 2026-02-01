@@ -11,8 +11,16 @@ function loadServiceAccount() {
       throw new Error("FIREBASE_SERVICE_ACCOUNT contains invalid JSON");
     }
   }
-  // Try a few common filenames the downloaded JSON might have. The user
-  // requested using the .json file directly; keep the file out of git via .gitignore.
+  
+  // In production/Vercel, env var is required
+  if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
+    throw new Error(
+      "FIREBASE_SERVICE_ACCOUNT environment variable is required in production. " +
+      "Add it in your Vercel project settings -> Environment Variables."
+    );
+  }
+  
+  // Try a few common filenames for local development only
   const candidates = [
     "portfolio-5fabd-firebase-adminsdk-fbsvc-0a6eb20801.json",
     "serviceAccountKey.json",
