@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { LinkedInIcon, GitHubIcon, GmailIcon } from '../assets/icon'
 
 const Introduction = () => {
   return (
@@ -48,31 +49,34 @@ const Introduction = () => {
             <div className="mt-6 flex flex-wrap gap-4 text-sm">
               <a 
                 href="mailto:ni30.dev@gmail.com" 
-                className="flex items-center gap-2 rounded-lg bg-zinc-100 px-4 py-2 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+                className="flex items-center gap-2 rounded-lg bg-zinc-100 px-4 py-2 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700 transition-colors"
               >
-                📧 Email
+                <GmailIcon className="text-red-600" />
+                <span>Email</span>
               </a>
               <a 
                 href="https://github.com/ni30gupta" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-lg bg-zinc-100 px-4 py-2 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+                className="flex items-center gap-2 rounded-lg bg-zinc-100 px-4 py-2 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700 transition-colors"
               >
-                💻 GitHub
+                <GitHubIcon className="text-zinc-900 dark:text-zinc-100" />
+                <span>GitHub</span>
               </a>
               <a 
                 href="https://linkedin.com/in/ni30gupta" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-lg bg-zinc-100 px-4 py-2 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+                className="flex items-center gap-2 rounded-lg bg-zinc-100 px-4 py-2 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700 transition-colors"
               >
-                🔗 LinkedIn
+                <LinkedInIcon className="text-blue-600 dark:text-blue-400" />
+                <span>LinkedIn</span>
               </a>
               <a 
-                href="https://drive.google.com/uc?export=download&id=1GblPW6nwNSO5WV9vv97OFIAphZdcOrkl" 
+                href="https://drive.google.com/drive/folders/1wLha6LbyZWeLqSuotZA8Es3jLS2AN0fv?usp=sharing" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600"
+                className="flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 transition-colors"
               >
                 📄 Download Resume
               </a>
