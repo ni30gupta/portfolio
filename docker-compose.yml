@@ -2,11 +2,11 @@ services:
   nextjs:
     build: .
     container_name: portfolio_nextjs
-    ports:
-      - "3000:3000"  # Expose to host for direct access
     environment:
       - NODE_ENV=production
     restart: always
+    env_file:
+      - .env.production
     networks:
       - app_network
 
@@ -18,12 +18,24 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - certbot_data:/etc/letsencrypt:ro
+      - certbot_www:/var/www/certbot:ro
     depends_on:
       - nextjs
     networks:
       - app_network
 
+  certbot:
+    image: certbot/dns-cloudflare
+    volumes:
+      - certbot_data:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+      - ./secrets/cloudflare.ini:/etc/letsencrypt/cloudflare.ini:ro
+
+volumes:
+  certbot_data:
+  certbot_www:
 
 networks:
   app_network:
